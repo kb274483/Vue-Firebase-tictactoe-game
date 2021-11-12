@@ -1,6 +1,7 @@
-# tictactoe 
+# tictactoe-link
 https://firebase-tictactoe.herokuapp.com/#/
 
+#Description
 ## 功能說明
 這是個簡易的網頁版井字遊戲，
 
