@@ -1,4 +1,6 @@
 # tictactoe 
+https://firebase-tictactoe.herokuapp.com/#/
+
 ## 功能說明
 簡易的網頁版井字遊戲，提供單機遊玩以及支援連線對戰，上限為8人。
 連線模式的部分透過 firebase 做即時資料庫處理，專注在盡快完成功能的實踐，
