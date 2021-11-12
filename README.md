@@ -5,5 +5,6 @@
 所以 Code 很亂也沒有拆分 Componet 請見諒。
 
 遊戲畫面:
+
 ![image](035ae8b6d2aabc87106df07f0f027458.png)
 ![image](114f0e17a440d0f8c2529cacc41ea952.png)
