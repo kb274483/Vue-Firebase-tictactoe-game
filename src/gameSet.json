@@ -1,0 +1,43 @@
+{
+		"playerList" : [
+			{"used":false},
+			{"used":false},
+			{"used":false},
+			{"used":false},
+			{"used":false},
+			{"used":false},
+			{"used":false},
+			{"used":false}
+		],
+		"gameSet":[
+			{
+        "pOne": "",
+        "pTwo": "",
+        "count": 0,
+        "switch": false,
+        "gamesID":0,
+        "boardRecord": [0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },{
+        "pOne": "",
+        "pTwo": "",
+        "count": 0,
+        "switch": false,
+        "gamesID":1,
+        "boardRecord": [0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },{
+        "pOne": "",
+        "pTwo": "",
+        "count": 0,
+        "switch": false,
+        "gamesID":2,
+        "boardRecord": [0, 0, 0, 0, 0, 0, 0, 0, 0]
+      },{
+        "pOne": "",
+        "pTwo": "",
+        "count": 0,
+        "switch": false,
+        "gamesID":3,
+        "boardRecord": [0, 0, 0, 0, 0, 0, 0, 0, 0]
+      }
+		]
+}
