@@ -1,24 +1,7 @@
-# tictactoe
+# tictactoe 
+## 功能說明
+簡易的網頁版井字遊戲，提供單機遊玩以及連線對戰，最多支援8人。
+連線模式透過 firebase 做即時資料庫處理，主要在盡快完成功能的實踐，
+所以 Code 很亂也沒有拆分 Componet 請見諒。
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+遊戲畫面:
