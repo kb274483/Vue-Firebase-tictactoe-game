@@ -141,6 +141,7 @@ export default {
     onMounted(() => {
       DataService.getAll().on("value", confirmPlayer);
       DataService.getAllGame().on("value", runGame);
+      window.addEventListener("beforeunload", (e) => beforeunloadHandler(e));
     });
     onBeforeUnmount(() => {
       let data = {
@@ -155,7 +156,26 @@ export default {
         DataService.updateList(id.value, { used: false });
       }
       DataService.updateGame(session.value, data);
+      window.removeEventListener("beforeunload", (e) =>
+        this.beforeunloadHandler(e)
+      );
     });
+
+    const beforeunloadHandler = (e) => {
+      let data = {
+        pOne: "",
+        pTwo: "",
+        count: 0,
+        switch: false,
+        gamesID: session.value,
+        boardRecord: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      };
+      if (id.value >= 0) {
+        DataService.updateList(id.value, { used: false });
+      }
+      DataService.updateGame(session.value, data);
+      console.log(e);
+    };
 
     return {
       NowPlayer,
@@ -256,12 +276,12 @@ export default {
               <h5 class="modal-title" id="staticBackdropLabel" v-else>
                 這次平手
               </h5>
-              <button
+              <!-- <button
                 type="button"
                 class="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              ></button>
+              ></button> -->
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer">
