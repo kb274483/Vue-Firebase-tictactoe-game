@@ -27,6 +27,7 @@ export default {
       [2, 4, 6],
     ]);
 
+    // 判斷ID 將使用者輸入的名字放入對應Player
     const typeName = () => {
       let name = document.querySelector(".form-control");
       let maskOff = document.querySelector(".nameContainer");
@@ -42,6 +43,7 @@ export default {
       DataService.updateGame(session.value, updateData);
     };
 
+    // 在每次資料庫更新時執行，同步兩邊資料，並渲染圖片上去。
     const runGame = (item) => {
       boardWin.value = item.val()[session.value].boardRecord;
       count.value = item.val()[session.value].count;
@@ -59,22 +61,29 @@ export default {
       isWin();
     };
 
+    // 每一次下棋時先取得是哪個使用者，便將資料同步上去
     const chess = (e) => {
       let switchPlayer = count.value % 2;
       let num = e.target.dataset.num;
       if (switchPlayer === 0 && boardWin.value[num] === 0) {
         boardWin.value[num] = 1;
         count.value++;
+        let result = {
+          boardRecord: boardWin.value,
+          count: count.value,
+          switch: switchPlayer === 0 ? true : false,
+        };
+        DataService.updateGame(session.value, result);
       } else if (switchPlayer === 1 && boardWin.value[num] === 0) {
         boardWin.value[num] = -1;
         count.value++;
+        let result = {
+          boardRecord: boardWin.value,
+          count: count.value,
+          switch: switchPlayer === 0 ? true : false,
+        };
+        DataService.updateGame(session.value, result);
       }
-      let result = {
-        boardRecord: boardWin.value,
-        count: count.value,
-        switch: switchPlayer === 0 ? true : false,
-      };
-      DataService.updateGame(session.value, result);
     };
 
     const joinGame = () => {
@@ -87,9 +96,9 @@ export default {
       } else if (id.value === 6 || id.value === 7) {
         session.value = 3;
       }
-      // console.log(item.val()[session.value]);
     };
 
+    //確認使用者在進入遊戲時是否取得ID
     const confirmPlayer = (item) => {
       if (id.value === -2) {
         const router = useRouter();
@@ -104,13 +113,13 @@ export default {
       }
     };
 
+    // 贏得比賽的判斷
     const isWin = () => {
       winCondition.value.forEach((item) => {
         let score = boardWin.value;
         let isWin = document.querySelector("#win");
         let winDows = document.querySelector("#staticBackdrop");
         let winPic = document.querySelector(".modal-body");
-
         if (score[item[0]] + score[item[1]] + score[item[2]] === 3) {
           isWin.click(function () {
             winDows.modal();
@@ -131,18 +140,22 @@ export default {
       });
     };
 
+    // 確認下棋方與資料庫該輪到那一方的資訊一樣，才關閉遮罩。
     const playerSwitch = computed(() =>
       id.value % 2 === NowPlayer.value % 2 ? false : true
     );
+    // 要再雙方都有玩家時才可以進行遊戲。
     const wait = computed(() =>
       playerOne.value === "" || playerTwo.value === "" ? true : false
     );
-
+    // 建立與資料庫的連線以及監聽網頁即將關閉的事件，隨時取得最新資料。
     onMounted(() => {
       DataService.getAll().on("value", confirmPlayer);
       DataService.getAllGame().on("value", runGame);
       window.addEventListener("beforeunload", (e) => beforeunloadHandler(e));
     });
+    // 網頁即將關閉或元件毀滅時進行資料庫資料還原。
+    // ----------------------------------------------
     onBeforeUnmount(() => {
       let data = {
         pOne: "",
@@ -160,7 +173,6 @@ export default {
         this.beforeunloadHandler(e)
       );
     });
-
     const beforeunloadHandler = (e) => {
       let data = {
         pOne: "",
@@ -176,7 +188,7 @@ export default {
       DataService.updateGame(session.value, data);
       console.log(e);
     };
-
+    // ----------------------------------------------
     return {
       NowPlayer,
       back,
