@@ -56,6 +56,8 @@ export default {
           chess[idx].innerHTML = `<img src="${Osrc}" />`;
         } else if (el === -1) {
           chess[idx].innerHTML = `<img src="${Xsrc}" />`;
+        } else if (el === 0) {
+          chess[idx].innerHTML = ``;
         }
       });
       isWin();
@@ -157,9 +159,15 @@ export default {
     // 網頁即將關閉或元件毀滅時進行資料庫資料還原。
     // ----------------------------------------------
     onBeforeUnmount(() => {
+      let playerID = id.value % 2;
+      if (playerID === 0) {
+        playerOne.value = "";
+      } else if (playerID === 1) {
+        playerTwo.value = "";
+      }
       let data = {
-        pOne: "",
-        pTwo: "",
+        pOne: playerOne.value,
+        pTwo: playerTwo.value,
         count: 0,
         switch: false,
         gamesID: session.value,
@@ -174,9 +182,15 @@ export default {
       );
     });
     const beforeunloadHandler = (e) => {
+      let playerID = id.value % 2;
+      if (playerID === 0) {
+        playerOne.value = "";
+      } else if (playerID === 1) {
+        playerTwo.value = "";
+      }
       let data = {
-        pOne: "",
-        pTwo: "",
+        pOne: playerOne.value,
+        pTwo: playerTwo.value,
         count: 0,
         switch: false,
         gamesID: session.value,
