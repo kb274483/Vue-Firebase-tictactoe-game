@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/database";
+import "firebase/auth";
 
 let config = {
   apiKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -13,5 +14,5 @@ let config = {
 };
 
 firebase.initializeApp(config);
-
+export const firebaseAuth = firebase.auth();
 export default firebase.database();
