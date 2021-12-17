@@ -87,7 +87,8 @@ export default {
         DataService.updateGame(session.value, result);
       }
     };
-
+    
+    //依據玩家的ID 分配他們的遊戲場次
     const joinGame = () => {
       if (id.value === 0 || id.value === 1) {
         session.value = 0;
